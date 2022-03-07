@@ -35,3 +35,4 @@ npm-debug.log*
 
 /src/assets/lang/*
 /src/assets/env.json
+*.code-workspace

@@ -50,7 +50,7 @@ export class CoreLoginCredentialsPage implements OnInit, OnDestroy {
     identityProviders?: CoreSiteIdentityProvider[];
     pageLoaded = false;
     isBrowserSSO = false;
-    isFixedUrlSet = false;
+    isFixedUrlSet = true;
     showForgottenPassword = true;
     showScanQR = false;
 
