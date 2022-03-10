@@ -36,7 +36,7 @@ export class ApiService {
 
   getUserData(userid: any) {
 
-    if (!CoreApp.isOnline()) {
+    if (CoreApp.isOnline()) {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export class ApiService {
         "userid": userid
       }
 
-      if (!CoreApp.isOnline()) {
+      if (CoreApp.isOnline()) {
         return this.http.post('https://sony.learnospace.com/api/methods.php?methodname=getUserData', JSON.stringify(postData), httpOptions).pipe(
           map(res => res['Data']),
           tap(res => {
@@ -67,7 +67,7 @@ export class ApiService {
 
 
   updateUserPoints(userid: any, points: any) {
-    if (!CoreApp.isOnline()) {
+    if (CoreApp.isOnline()) {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
