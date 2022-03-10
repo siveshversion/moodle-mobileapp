@@ -84,6 +84,12 @@
         --background-alternative: var(--gray-lighter);
     }
 
+
+    ion-content.core-center-view.md.hydrated{
+        --background: url('/assets/img/login_bg.png')0 0/100% no-repeat;
+        --background-size: cover;
+    }
+
     --core-bottom-tabs-background: var(--black);
     --core-bottom-tabs-color: var(--gray-lighter);
     --core-bottom-tabs-color-selected: var(--brand-color);

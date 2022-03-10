@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -34,7 +34,8 @@ import { CoreForms } from '@singletons/form';
 @Component({
     selector: 'page-core-login-credentials',
     templateUrl: 'credentials.html',
-    styleUrls: ['../../login.scss'],
+    styleUrls: ['credentials.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class CoreLoginCredentialsPage implements OnInit, OnDestroy {
 
