@@ -66,7 +66,7 @@ export class CoreMainMenuMorePage implements OnInit, OnDestroy {
         );
         this.loadSiteInfo();
         this.showScanQR = CoreUtils.canScanQR() &&
-                !CoreSites.getCurrentSite()?.isFeatureDisabled('CoreMainMenuDelegate_QrReader');
+            !CoreSites.getCurrentSite()?.isFeatureDisabled('CoreMainMenuDelegate_QrReader');
     }
 
     /**
@@ -203,9 +203,21 @@ export class CoreMainMenuMorePage implements OnInit, OnDestroy {
     /**
      * Logout the user.
      */
+    // logout(): void {
+    //     this.loggedOut = true;
+    //     CoreSites.logout();
+    // }
+
     logout(): void {
-        this.loggedOut = true;
-        CoreSites.logout();
+
+        // cm_deleteSite for logging out which prevents navigation to reconnect.ts
+
+        const currentSiteId = CoreSites.getCurrentSiteId();
+
+        CoreSites.cm_deleteSite(currentSiteId).then(() => {
+            this.loggedOut = true;
+            CoreSites.logout();
+        });
     }
 
 }

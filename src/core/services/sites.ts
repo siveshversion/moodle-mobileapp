@@ -565,7 +565,7 @@ export class CoreSitesProvider {
      * @return Site ID.
      */
     createSiteID(siteUrl: string, username: string): string {
-        return <string> Md5.hashAsciiStr(siteUrl + username);
+        return <string>Md5.hashAsciiStr(siteUrl + username);
     }
 
     /**
@@ -957,6 +957,32 @@ export class CoreSitesProvider {
         CoreEvents.trigger(CoreEvents.SITE_DELETED, site, siteId);
     }
 
+
+    //custom delete site while logging out
+
+    async cm_deleteSite(siteId: string): Promise<void> {
+
+        const site = await this.getSite(siteId);
+
+        await site.deleteDB();
+
+        // Site DB deleted, now delete the app from the list of sites.
+        delete this.sites[siteId];
+
+        try {
+            const db = await this.appDB;
+
+            await db.deleteRecords(SITES_TABLE_NAME, { id: siteId });
+        } catch (err) {
+            // DB remove shouldn't fail, but we'll go ahead even if it does.
+        }
+
+        // Site deleted from sites list, now delete the folder.
+        await site.deleteFolder();
+
+        CoreEvents.trigger(CoreEvents.SITE_DELETED, site, siteId);
+    }
+
     /**
      * Check if there are sites stored.
      *
@@ -1020,8 +1046,8 @@ export class CoreSitesProvider {
      */
     makeSiteFromSiteListEntry(entry: SiteDBEntry): Promise<CoreSite> {
         // Parse info and config.
-        const info = entry.info ? <CoreSiteInfo> CoreTextUtils.parseJSON(entry.info) : undefined;
-        const config = entry.config ? <CoreSiteConfig> CoreTextUtils.parseJSON(entry.config) : undefined;
+        const info = entry.info ? <CoreSiteInfo>CoreTextUtils.parseJSON(entry.info) : undefined;
+        const config = entry.config ? <CoreSiteConfig>CoreTextUtils.parseJSON(entry.config) : undefined;
 
         const site = CoreSitesFactory.makeSite(
             entry.id,
@@ -1094,12 +1120,12 @@ export class CoreSitesProvider {
         sites.forEach((site) => {
             if (!ids || ids.indexOf(site.id) > -1) {
                 // Parse info.
-                const siteInfo = site.info ? <CoreSiteInfo> CoreTextUtils.parseJSON(site.info) : undefined;
+                const siteInfo = site.info ? <CoreSiteInfo>CoreTextUtils.parseJSON(site.info) : undefined;
                 const basicInfo: CoreSiteBasicInfo = {
                     id: site.id,
                     siteUrl: site.siteUrl,
                     fullName: siteInfo?.fullname,
-                    siteName: CoreConstants.CONFIG.sitename == '' ? siteInfo?.sitename: CoreConstants.CONFIG.sitename,
+                    siteName: CoreConstants.CONFIG.sitename == '' ? siteInfo?.sitename : CoreConstants.CONFIG.sitename,
                     avatar: siteInfo?.userpictureurl,
                     siteHomeId: siteInfo?.siteid || 1,
                 };
@@ -1151,7 +1177,7 @@ export class CoreSitesProvider {
      */
     async getLoggedInSitesIds(): Promise<string[]> {
         const db = await this.appDB;
-        const sites = await db.getRecords<SiteDBEntry>(SITES_TABLE_NAME, { loggedOut : 0 });
+        const sites = await db.getRecords<SiteDBEntry>(SITES_TABLE_NAME, { loggedOut: 0 });
 
         return sites.map((site) => site.id);
     }
@@ -1515,7 +1541,7 @@ export class CoreSitesProvider {
 
         try {
             // Site has already been created, apply the schema directly.
-            const schemas: {[name: string]: CoreRegisteredSiteSchema} = {};
+            const schemas: { [name: string]: CoreRegisteredSiteSchema } = {};
             schemas[schema.name] = schema;
 
             // Apply it to the specified site only.
@@ -1562,13 +1588,13 @@ export class CoreSitesProvider {
      * @param schemas Schemas to migrate.
      * @return Promise resolved when done.
      */
-    protected async applySiteSchemas(site: CoreSite, schemas: {[name: string]: CoreRegisteredSiteSchema}): Promise<void> {
+    protected async applySiteSchemas(site: CoreSite, schemas: { [name: string]: CoreRegisteredSiteSchema }): Promise<void> {
         const db = site.getDb();
 
         // Fetch installed versions of the schema.
         const records = await db.getAllRecords<SchemaVersionsDBEntry>(SCHEMA_VERSIONS_TABLE_NAME);
 
-        const versions: {[name: string]: number} = {};
+        const versions: { [name: string]: number } = {};
         records.forEach((record) => {
             versions[record.name] = record.version;
         });
@@ -1624,11 +1650,11 @@ export class CoreSitesProvider {
      * @return Promise resolved with site to use and the list of sites that have
      *         the URL. Site will be undefined if it isn't the root URL of any stored site.
      */
-    async isStoredRootURL(url: string, username?: string): Promise<{site?: CoreSite; siteIds: string[]}> {
+    async isStoredRootURL(url: string, username?: string): Promise<{ site?: CoreSite; siteIds: string[] }> {
         // Check if the site is stored.
         const siteIds = await this.getSiteIdsFromUrl(url, true, username);
 
-        const result: {site?: CoreSite; siteIds: string[]} = {
+        const result: { site?: CoreSite; siteIds: string[] } = {
             siteIds,
         };
 
@@ -1927,3 +1953,6 @@ export type CoreSitesLoginTokenResponse = {
     debuginfo?: string;
     reproductionlink?: string;
 };
+
+
+
