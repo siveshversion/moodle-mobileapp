@@ -23,6 +23,9 @@ import { CoreDomUtils } from '@services/utils/dom';
 import { CoreCourseBlock } from '@features/course/services/course';
 import { CoreBlockComponent } from '@features/block/components/block/block';
 import { CoreNavigator } from '@services/navigator';
+import { ApiService } from '@/api.service';
+import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network';
 
 /**
  * Page that displays the dashboard page.
@@ -31,6 +34,7 @@ import { CoreNavigator } from '@services/navigator';
     selector: 'page-core-courses-dashboard',
     templateUrl: 'dashboard.html',
     styleUrls: ['dashboard.scss'],
+    providers: [ApiService, Network]
 })
 export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
 
@@ -45,7 +49,51 @@ export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
     blocks: Partial<CoreCourseBlock>[] = [];
     loaded = false;
 
+    //custom variables
+    Points = 0;
+    TotalCourses = 0;
+    NotStartedCourses = 0;
+    InProgressCourses = 0;
+    CompletedCourses = 0;
+    total_certifications = 0;
+    total_points = 0;
+    redeemed_points = 0;
+    balance_points = 0;
+
+    UserData = [];
+    PointsDetails: any;
+
+
+    count_1 = 0;
+    count_2 = 0;
+    count_3 = 0;
+    count_4 = 0;
+    count_5 = 0;
+    count_6 = 0;
+    count_7 = 0;
+    completed_count_1 = 0;
+    completed_count_2 = 0;
+    completed_count_3 = 0;
+    completed_count_4 = 0;
+    completed_count_5 = 0;
+    completed_count_6 = 0;
+    completed_count_7 = 0;
+    completed_count_per_1 = 0;
+    completed_count_per_2 = 0;
+    completed_count_per_3 = 0;
+    completed_count_per_4 = 0;
+    completed_count_per_5 = 0;
+    completed_count_per_6 = 0;
+    completed_count_per_7 = 0;
+
+    siteInfo: any;
+    siteName!: string;
+    siteUrl!: string;
+
     protected updateSiteObserver?: CoreEventObserver;
+
+
+    constructor(public apiProvider: ApiService, public router: Router) { }
 
     /**
      * Initialize the component.
@@ -65,6 +113,9 @@ export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
         }, CoreSites.getCurrentSiteId());
 
         this.loadContent();
+
+        this.loadSiteInfo();
+        this.loadPoints(CoreSites.getCurrentSite()!.getUserId());
     }
 
     /**
@@ -105,11 +156,11 @@ export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
         this.blocks = [
             {
                 name: 'myoverview',
-                visible: true,
+                visible: false,
             },
             {
                 name: 'timeline',
-                visible: true,
+                visible: false,
             },
         ];
     }
@@ -175,6 +226,61 @@ export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
      */
     ngOnDestroy(): void {
         this.updateSiteObserver?.off();
+    }
+
+
+    //custom changes
+
+    loadPoints(userid: number) {
+
+        this.Points = 0;
+        this.total_certifications = 0;
+        this.apiProvider.getCoursePoints(true).subscribe(res => {
+            this.PointsDetails = res;
+            this.PointsDetails.forEach((coursepoint: any) => {
+                this.Points = Number(this.Points) + Number(coursepoint.points);
+            });
+
+            this.apiProvider.updateUserPoints(userid, this.Points);
+            this.apiProvider.getUserData(userid);
+
+
+        });
+
+        this.apiProvider.getUserData(userid)?.subscribe(res => {
+            this.UserData = res;
+            this.UserData.forEach((user: any) => {
+                this.total_certifications = user.total_certifications;
+                this.total_points = user.total_points;
+                this.redeemed_points = user.redeemed_points;
+                this.balance_points = user.balance_points;
+            });
+        });
+
+    }
+
+    protected async loadSiteInfo(): Promise<void> {
+        const currentSite = CoreSites.getCurrentSite();
+
+        if (!currentSite) {
+            return;
+        }
+
+        this.siteInfo = currentSite.getInfo();
+        this.siteName = currentSite.getSiteName();
+        this.siteUrl = currentSite.getURL();
+
+
+    }
+
+    gotocourses(categoryId: number): void {
+
+        let object = {
+            categoryId: categoryId
+        }
+        this.router.navigate(['/CoreCoursesCategoriesPage'], {
+            queryParams: object,
+        });
     }
 
 }

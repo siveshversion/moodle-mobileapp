@@ -1,14 +1,15 @@
 <core-navbar-buttons slot="end">
-    <ion-button *ngIf="searchEnabled" (click)="openSearch()" [attr.aria-label]="'core.courses.searchcourses' | translate">
+    <ion-button *ngIf="searchEnabled" (click)="openSearch()"
+        [attr.aria-label]="'core.courses.searchcourses' | translate">
         <ion-icon name="fas-search" slot="icon-only" aria-hidden="true"></ion-icon>
     </ion-button>
     <core-context-menu>
         <core-context-menu-item *ngIf="(downloadCourseEnabled || downloadCoursesEnabled)" [priority]="1000"
-        [content]="'core.settings.showdownloadoptions' | translate" (action)="toggleDownload()"
-        [iconAction]="downloadEnabledIcon"></core-context-menu-item>
+            [content]="'core.settings.showdownloadoptions' | translate" (action)="toggleDownload()"
+            [iconAction]="downloadEnabledIcon"></core-context-menu-item>
         <core-context-menu-item *ngIf="(downloadCourseEnabled || downloadCoursesEnabled)" [priority]="500"
-        [content]="'addon.storagemanager.managestorage' | translate"
-        (action)="manageCoursesStorage()" iconAction="fas-archive"></core-context-menu-item>
+            [content]="'addon.storagemanager.managestorage' | translate" (action)="manageCoursesStorage()"
+            iconAction="fas-archive"></core-context-menu-item>
     </core-context-menu>
 </core-navbar-buttons>
 <ion-content>
@@ -16,15 +17,91 @@
         <ion-refresher-content pullingText="{{ 'core.pulltorefresh' | translate }}"></ion-refresher-content>
     </ion-refresher>
 
-    <core-loading [hideUntil]="loaded">
-        <ion-list>
-            <ng-container *ngFor="let block of blocks">
-                <core-block *ngIf="block.visible" [block]="block" contextLevel="user" [instanceId]="userId"
-                [extraData]="{'downloadEnabled': downloadEnabled}"></core-block>
-            </ng-container>
-        </ion-list>
 
-        <core-empty-box *ngIf="blocks.length == 0" icon="fas-th-large" [message]="'core.course.nocontentavailable' | translate">
-        </core-empty-box>
-    </core-loading>
+    <div class="pointsBox">
+        <div class="pointsHeading">POINTS</div>
+        <span style="padding-right:10px;">Earned : {{total_points}}</span>
+        <span style="padding-right:10px;">Redeemed : {{redeemed_points}}</span>
+        <span style="padding-right:0px;">Balance : {{balance_points}}</span>
+    </div>
+
+    <div class="Cus_Profile_Course">
+        <div class="Cus_Profile">
+            <ion-card>
+                <ion-item>
+                    <ion-avatar core-user-avatar [user]="siteInfo" item-start></ion-avatar>
+                </ion-item>
+            </ion-card>
+            <div class="CusProfileName">{{siteInfo.firstname}}</div>
+        </div>
+
+
+        <div class="Cus_Course_Status">
+
+            <p>TOTAL COURSES : {{TotalCourses}}</p>
+            <p>NOT STARTED : {{NotStartedCourses}}</p>
+            <p>IN PROGRESS : {{InProgressCourses}}</p>
+            <p>COMPLETED : {{CompletedCourses}}</p>
+            <p>CERTIFICATIONS : {{total_certifications}}</p>
+        </div>
+    </div>
+
+    <div style="clear:both;padding-bottom: 20px;"></div>
+    <div style="background-color:#E13D35;height:65%">
+        <div class="images">
+            <div>
+                <a (click)="gotocourses(1)">
+                    <img src="assets/img/tv.png">
+                </a>
+                <div class="CusCategoryLabel">TV ({{count_1}})</div>
+                <core-progress-bar [progress]="completed_count_per_1" height="20"></core-progress-bar>
+            </div>
+            <div>
+                <a (click)="gotocourses(2)">
+                    <img src="assets/img/mdr.png">
+                </a>
+                <div class="CusCategoryLabel">Personal Audio ({{count_2}})</div>
+                <core-progress-bar [progress]="completed_count_per_2"></core-progress-bar>
+            </div>
+            <div>
+                <a (click)="gotocourses(3)">
+                    <img src="assets/img/sound_bar.png">
+                </a>
+                <div class="CusCategoryLabel">Sound Bar ({{count_3}})</div>
+                <core-progress-bar [progress]="completed_count_per_3"></core-progress-bar>
+            </div>
+            <div>
+                <a (click)="gotocourses(6)">
+                    <img src="assets/img/di.png">
+                </a>
+                <div class="CusCategoryLabel">DI ({{count_6}})</div>
+                <core-progress-bar [progress]="completed_count_per_6"></core-progress-bar>
+            </div>
+
+            <div>
+                <a (click)="gotocourses(5)">
+                    <img src="assets/img/party_speakers.png">
+                </a>
+                <div class="CusCategoryLabel">Party Speakers ({{count_5}})</div>
+                <core-progress-bar [progress]="completed_count_per_5" [class]="Test"></core-progress-bar>
+            </div>
+
+
+            <!-- <div>
+                <a (click)="gotocourses(6)">
+                    <img src="assets/img/6.png">
+                </a>
+                <div class="CusCategoryLabel">DI ({{count_6}})</div>
+                <core-progress-bar [progress]="completed_count_per_6" [class]="Test"></core-progress-bar>
+            </div> -->
+            <div>
+                <a (click)="gotocourses(4)">
+                    <img src="assets/img/personal.png">
+                </a>
+                <div class="CusCategoryLabel">Self Development ({{count_4}})</div>
+                <core-progress-bar [progress]="completed_count_per_4" [class]="Test"></core-progress-bar>
+            </div>
+        </div>
+    </div>
+
 </ion-content>

@@ -1,0 +1,160 @@
+.Cus_Profile_Course {
+  width: 100%;
+}
+
+.CusProfileName {
+  font-size: 1em;
+  font-weight: bold;
+  font-family: inherit;
+  text-align: center;
+}
+
+.Cus_Profile {
+  float: left;
+  width: 50%;
+  text-align: center;
+  border-right: 1px solid #cccccc;
+}
+
+.Cus_Course_Status {
+  padding-left: 30px;
+  font-size: 0.9em;
+  font-weight: bold;
+  float: right;
+  width: 50%;
+  font-family: inherit;
+}
+
+.item-md {
+  padding-left: 30px !important;
+}
+
+ion-app.app-root core-progress-bar progress .progress-bar-fallback,
+ion-app.app-root core-progress-bar progress[value]::-webkit-progress-bar {
+  background-color: green !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ffffff !important;
+}
+
+.pointsHeading {
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 1.3rem !important;
+}
+
+.pointsBox {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 1em;
+  font-family: inherit;
+  text-align: center;
+  background-color: #cccccc;
+  margin: 10px 10px 10px 10px;
+  font-size: 1.3rem;
+}
+
+
+.image-container {
+  min-height: 100px;
+}
+
+@media (min-width: 0px) {
+  .images {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 360px) {
+  .images {
+    float: center;
+    padding: 30px 5px 5px 5px;
+    column-count: 3;
+    background-color: #E13D35;
+    text-align: center;
+    font-size: 1.3em;
+  }
+
+  .swiper-pagination-fraction,
+  .swiper-pagination-custom,
+  .swiper-container-horizontal>.swiper-pagination-bullets {
+    margin-bottom: 10px;
+  }
+
+  .SecondPageSpl {
+    padding-bottom: 100px;
+  }
+}
+
+@media (min-width: 640px) {
+  .images {
+    float: center;
+  }
+
+  ion-slides {
+    height: 140% !important;
+  }
+}
+
+.one-image {
+  margin: 2px;
+}
+
+.card-md,
+ion-app.app-root page-addon-mod-lesson-player .item-md table,
+ion-app.app-root.md .core-primary-card,
+ion-app.app-root.md .core-secondary-card,
+ion-app.app-root.md .core-danger-card,
+ion-app.app-root.md .core-light-card,
+ion-app.app-root.md .core-gray-card,
+ion-app.app-root.md .core-dark-card,
+ion-app.app-root.md .core-warning-card,
+ion-app.app-root.md .core-success-card,
+ion-app.app-root.md .core-info-card,
+ion-app.app-root.md .core-inverted-card {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.item-md {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.item-md ion-avatar ion-img,
+.item-md ion-avatar img {
+  width: 100px;
+  height: 100px;
+}
+
+.CusCategoryLabel {
+  font-size: 0.5em;
+  color: #ffffff;
+  font-family: inherit;
+  text-align: center;
+}
+
+ion-app.app-root core-progress-bar {
+  padding-right: 0px !important;
+}
+
+.CusCategoryLabelColor {
+  color: #e23e36;
+}
+
+@media (max-width: 360px) {
+  .item-md ion-avatar {
+    left: 0%;
+  }
+}
+
+@media (min-width: 640px) {
+  .item-md ion-avatar {
+    left: 25%;
+  }
+}
+
+a {
+  cursor: pointer;
+}
