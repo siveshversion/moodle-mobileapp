@@ -8,6 +8,11 @@
         --color: var(--core-login-text-color);
     }
 
+    #bg{
+        background-image: url("/assets/img/login_bg.png");   
+        width: 100%;
+    }
+
     ion-item ion-label {
         --color: var(--core-login-text-color);
 
