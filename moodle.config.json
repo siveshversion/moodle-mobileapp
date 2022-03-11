@@ -1,9 +1,9 @@
 {
-    "app_id": "com.learnospace.sonylms",
+    "app_id": "com.learnospace.sonylmsv2",
     "appname": "Learnospace Mobile",
     "desktopappname": "Learnospace Desktop",
-    "versioncode": 3950,
-    "versionname": "3.9.5",
+    "versioncode": 1010,
+    "versionname": "1.1.0-prod",
     "cache_update_frequency_usually": 420000,
     "cache_update_frequency_often": 1200000,
     "cache_update_frequency_sometimes": 3600000,
