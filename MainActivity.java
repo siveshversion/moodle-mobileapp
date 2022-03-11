@@ -14,8 +14,8 @@
 
 // Based on the template node_modules/cordova-android/bin/templates/project/Activity.java
 
-package com.learnospace.sonylmsv2;
-
+package com.learnospace.sonylms;
+    
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;

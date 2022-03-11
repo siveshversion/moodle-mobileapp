@@ -1,5 +1,5 @@
 {
-    "app_id": "com.learnospace.sonylmsv2",
+    "app_id": "com.learnospace.sonylms",
     "appname": "Learnospace Mobile",
     "desktopappname": "Learnospace Desktop",
     "versioncode": 1010,
@@ -97,7 +97,7 @@
     "forceLoginLogo": false,
     "ioswebviewscheme": "moodleappfs",
     "appstores": {
-        "android": "com.learnospace.sonylmsv2",
+        "android": "com.learnospace.sonylms",
         "ios": "id633359593"
     }
 }
