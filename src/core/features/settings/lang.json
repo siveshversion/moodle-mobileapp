@@ -1,6 +1,7 @@
 {
     "about": "About",
     "appsettings": "App settings",
+    "settings": "Settings",
     "appversion": "App version",
     "cannotsyncloggedout": "This site cannot be synchronised because you've logged out. Please try again when you're logged in the site again.",
     "cannotsyncoffline": "Cannot synchronise offline.",
