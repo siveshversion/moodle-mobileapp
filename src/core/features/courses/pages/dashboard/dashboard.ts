@@ -274,13 +274,7 @@ export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
     }
 
     gotocourses(categoryId: number): void {
-
-        let object = {
-            categoryId: categoryId
-        }
-        this.router.navigate(['/CoreCoursesCategoriesPage'], {
-            queryParams: object,
-        });
+        CoreNavigator.navigateToSitePath('courses/categories/' + categoryId);
     }
 
 }
