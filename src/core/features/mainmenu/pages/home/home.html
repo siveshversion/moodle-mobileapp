@@ -3,10 +3,9 @@
         <ion-buttons slot="start">
             <ion-back-button [text]="'core.back' | translate"></ion-back-button>
         </ion-buttons>
-        <h1>
-            <core-format-text [text]="siteName" contextLevel="system" [contextInstanceId]="0"></core-format-text>
-            <img src="assets/img/top_logo.png" class="core-header-logo" [alt]="siteName">
-        </h1>
+        <ion-title>
+            <ion-title><img id="headerLogo" src="assets/img/header_logo.png" style="margin:10px 0 10px 0" width="30%" height="30%"></ion-title>
+        </ion-title>
         <ion-buttons slot="end">
         </ion-buttons>
     </ion-toolbar>
