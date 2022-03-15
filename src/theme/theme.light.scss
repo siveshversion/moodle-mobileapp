@@ -86,7 +86,7 @@
 
 
     ion-content.core-center-view.md.hydrated{
-        --background: url('/assets/img/login_bg.png')0 0/100% no-repeat;
+        --background: url('/assets/img/login_bg.png')0 0/100% 100% no-repeat;
         --background-size: cover;
     }
 
@@ -198,7 +198,7 @@
     --core-progressbar-height: 8px;
     --core-progressbar-color: var(--brand-color);
     --core-progressbar-text-color: var(--gray-darker);
-    --core-progressbar-background: var(--gray-lighter);
+    --core-progressbar-background: black;
     core-progress-bar {
         --height: var(--core-progressbar-height);
         --color: var(--core-progressbar-color);

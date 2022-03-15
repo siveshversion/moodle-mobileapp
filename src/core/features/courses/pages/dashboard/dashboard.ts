@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { IonRefresher } from '@ionic/angular';
 
 import { CoreCourses, CoreCoursesProvider } from '../../services/courses';
@@ -34,7 +34,8 @@ import { Network } from '@ionic-native/network';
     selector: 'page-core-courses-dashboard',
     templateUrl: 'dashboard.html',
     styleUrls: ['dashboard.scss'],
-    providers: [ApiService, Network]
+    providers: [ApiService, Network],
+    encapsulation:ViewEncapsulation.None
 })
 export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
 
