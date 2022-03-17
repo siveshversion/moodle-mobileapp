@@ -65,7 +65,7 @@ export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
 
     UserData = [];
     PointsDetails: any;
-    CompletedCourseIds = [];
+    CompletedCourseIds : number[] = [];
 
 
     count_1 = 0;
