@@ -381,6 +381,28 @@ export class CoreCoursesDashboardPage implements OnInit, OnDestroy {
                             course.navOptions = options.navOptions[course.id];
                             course.admOptions = options.admOptions[course.id];
                         }
+                        if (this.count_1 > 0) {
+                            this.completed_count_per_1 = (this.completed_count_1 / this.count_1) * 100;
+                        }
+                        if (this.count_2 > 0) {
+                            this.completed_count_per_2 = (this.completed_count_2 / this.count_2) * 100;
+                        }
+                        if (this.count_3 > 0) {
+                            this.completed_count_per_3 = (this.completed_count_3 / this.count_3) * 100;
+                        }
+
+                        if (this.count_4 > 0) {
+                            this.completed_count_per_4 = (this.completed_count_4 / this.count_4) * 100;
+                        }
+                        if (this.count_5 > 0) {
+                            this.completed_count_per_5 = (this.completed_count_5 / this.count_5) * 100;
+                        }
+                        if (this.count_6 > 0) {
+                            this.completed_count_per_6 = (this.completed_count_6 / this.count_6) * 100;
+                        }
+                        if (this.count_7 > 0) {
+                            this.completed_count_per_7 = (this.completed_count_7 / this.count_7) * 100;
+                        }
                     });
                 });
             }

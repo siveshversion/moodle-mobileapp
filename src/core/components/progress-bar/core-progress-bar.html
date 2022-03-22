@@ -2,8 +2,13 @@
     <progress max="100" [value]="progress" role="progressbar" [attr.aria-valuenow]="progress"
         [attr.aria-valuetext]="progressBarValueText" [attr.aria-describedby]="ariaDescribedBy">
     </progress>
-    <div class="core-progress-text">
+    <span class="core-progress-text-blue" *ngIf="ConvertStringToNumber(text) > 90 ">
         <span class="sr-only" *ngIf="a11yText">{{ a11yText | translate }}</span>
         {{ 'core.percentagenumber' | translate: {$a: text} }}
-    </div>
+    </span>
+
+    <span class="core-progress-text" *ngIf="ConvertStringToNumber(text) < 90 ">
+        <span class="sr-only" *ngIf="a11yText">{{ a11yText | translate }}</span>
+        {{ 'core.percentagenumber' | translate: {$a: text} }}
+    </span>
 </ng-container>

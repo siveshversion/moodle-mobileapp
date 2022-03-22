@@ -77,4 +77,10 @@ export class CoreProgressBarComponent implements OnChanges {
         }
     }
 
+
+    ConvertStringToNumber(input: any) {
+        var numeric = Number(input);
+        return numeric;
+    }
+
 }
