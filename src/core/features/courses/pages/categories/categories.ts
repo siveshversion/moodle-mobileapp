@@ -51,7 +51,41 @@ export class CoreCoursesCategoriesPage implements OnInit {
         this.fetchCategories().finally(() => {
             this.categoriesLoaded = true;
         });
+
+        this.fetchCourses().finally(() => {
+            this.categoriesLoaded = true;
+        });
     }
+
+
+
+    protected fetchCourses(): Promise<any> {
+        return CoreCourses.getUserCourses().then(async (courses) => {
+
+            this.courses = await CoreCourses.getCoursesByField('category', this.categoryId);
+
+            const promises = [],
+                enrolledcourseIds = courses.map((c) => {
+                    return c.id;
+                })
+
+            return Promise.all(promises).then(() => {
+                this.courses.forEach(rec => {
+                    // alert(rec.id);
+                    if (enrolledcourseIds.includes(rec.id)) {
+                        this.courses = this.courses.filter(course => course.id == rec.id);
+                    }
+                })
+
+
+            });
+        }).catch((error) => {
+            CoreDomUtils.showErrorModalDefault(error, 'core.courses.errorloadcourses', true);
+        });
+    }
+
+
+
 
     /**
      * Fetch the categories.
@@ -59,7 +93,7 @@ export class CoreCoursesCategoriesPage implements OnInit {
      * @return Promise resolved when done.
      */
     protected async fetchCategories(): Promise<void> {
-        try{
+        try {
             const categories: CoreCategoryData[] = await CoreCourses.getCategories(this.categoryId, true);
 
             this.currentCategory = undefined;
@@ -111,7 +145,7 @@ export class CoreCoursesCategoriesPage implements OnInit {
         promises.push(CoreSites.getCurrentSite()!.invalidateConfig());
 
         Promise.all(promises).finally(() => {
-            this.fetchCategories().finally(() => {
+            this.fetchCourses().finally(() => {
                 refresher?.complete();
             });
         });
