@@ -22,4 +22,29 @@
         -webkit-transition: all 50ms ease-in-out;
         transition: all 50ms ease-in-out;
     }
+
+    .course-content {
+        display: block;
+        padding: 5px;
+    }
+
+    .courseimg {
+        display: block;
+        height: 300px;
+    }
+
+    .courseimg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .noImage.ng-star-inserted {
+        display: block;
+        background: aqua;
+        height: 300px;
+    }
+    .coursehead{
+        padding-top:10px;
+    }
 }

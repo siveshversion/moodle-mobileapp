@@ -141,7 +141,7 @@ ion-app.ios ion-header h2 {
 
     position: absolute;
     text-align: center;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 600;
     line-height: var(--core-header-toolbar-height);
     box-sizing: border-box;
@@ -816,7 +816,7 @@ html.md div.fake-ion-item {
 
     h2 {
         @include margin(2px, 0);
-        font-size: 16px;
+        font-size: 14px;
         font-weight: normal;
     }
 

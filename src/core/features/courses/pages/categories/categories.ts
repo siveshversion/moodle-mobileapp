@@ -72,8 +72,8 @@ export class CoreCoursesCategoriesPage implements OnInit {
             return Promise.all(promises).then(() => {
                 this.courses.forEach(rec => {
                     // alert(rec.id);
-                    if (enrolledcourseIds.includes(rec.id)) {
-                        this.courses = this.courses.filter(course => course.id == rec.id);
+                    if (!enrolledcourseIds.includes(rec.id)) {
+                        this.courses.splice(this.courses.findIndex((course) => course.id == rec.id), 1)
                     }
                 })
 
