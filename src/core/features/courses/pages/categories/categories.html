@@ -33,7 +33,7 @@
             </ion-label>
         </ion-item> -->
 
-        <div *ngIf="courses.length > 0">
+        <div *ngIf="courses.length > 0 && !notEnrolled">
             <ion-item-divider>
                 <ion-label>
                     <h2>{{ 'core.courses.courses' | translate }}</h2>
@@ -42,8 +42,10 @@
             <core-courses-course-list-item *ngFor="let course of courses" [course]="course">
             </core-courses-course-list-item>
         </div>
-        <core-empty-box *ngIf="!categories.length && !courses.length" icon="fas-graduation-cap"
+
+        <core-empty-box *ngIf="notEnrolled" icon="fas-graduation-cap"
             [message]="'core.courses.nocoursesyet' | translate">
         </core-empty-box>
+
     </core-loading>
 </ion-content>

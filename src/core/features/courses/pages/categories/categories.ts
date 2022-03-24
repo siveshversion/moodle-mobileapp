@@ -35,6 +35,7 @@ export class CoreCoursesCategoriesPage implements OnInit {
     categories: CoreCategoryData[] = [];
     courses: CoreCourseSearchedData[] = [];
     categoriesLoaded = false;
+    notEnrolled = true;
 
     protected categoryId = 0;
 
@@ -48,9 +49,9 @@ export class CoreCoursesCategoriesPage implements OnInit {
     ngOnInit(): void {
         this.categoryId = CoreNavigator.getRouteNumberParam('id') || 0;
 
-        this.fetchCategories().finally(() => {
-            this.categoriesLoaded = true;
-        });
+        // this.fetchCategories().finally(() => {
+        //     this.categoriesLoaded = true;
+        // });
 
         this.fetchCourses().finally(() => {
             this.categoriesLoaded = true;
@@ -74,6 +75,9 @@ export class CoreCoursesCategoriesPage implements OnInit {
                     // alert(rec.id);
                     if (!enrolledcourseIds.includes(rec.id)) {
                         this.courses.splice(this.courses.findIndex((course) => course.id == rec.id), 1)
+                    }
+                    else {
+                        this.notEnrolled = false;
                     }
                 })
 
