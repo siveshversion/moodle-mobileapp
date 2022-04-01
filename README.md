@@ -1,3 +1,5 @@
+Customizations done by me from this repo https://github.com/moodlehq/moodleapp
+
 Moodle Mobile
 =================
 
