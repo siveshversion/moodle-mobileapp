@@ -1,5 +1,7 @@
 Customizations done by me from this repo https://github.com/moodlehq/moodleapp
 
+worked on products (sony)
+
 Moodle Mobile
 =================
 
